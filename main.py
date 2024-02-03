@@ -8,16 +8,20 @@ def read_file(path: str) -> list[int]:
         lines = file.readlines()
     return list(map(lambda x: int(x), lines))
 
+
 def pollards_rho(n):
     if n % 2 == 0:
         return 2
-    x = 2; y = 2; d = 1
+    x = 2
+    y = 2
+    d = 1
     f = lambda x: (x**2 + 1) % n
     while d == 1:
         x = f(x)
         y = f(f(y))
         d = gcd(abs(x-y), n)
     return d
+
 
 def factorize_number(number: int) -> tuple[int, int]:
     d = pollards_rho(number)
