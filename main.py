@@ -2,6 +2,20 @@
 from sys import argv
 from math import gcd
 
+def isprime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
 
 def read_file(path: str) -> list[int]:
     with open(path, 'r') as file:
@@ -25,10 +39,9 @@ def pollards_rho(n):
 
 def factorize_number(number: int) -> tuple[int, int]:
     d = pollards_rho(number)
-    if d == number:
-        return number, 1
-    else:
-        return d, number // d
+    while not isprime(d):
+        d = pollards_rho(d)
+    return d, number // d
 
 
 def main() -> None:
