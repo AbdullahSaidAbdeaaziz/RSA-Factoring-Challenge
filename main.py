@@ -1,8 +1,14 @@
 #!/usr/bin/python3
 from sys import argv
-from math import gcd
 
-def isprime(n):
+
+def gcd(a: int, b: int) -> int:
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+
+def isprime(n: int) -> bool:
     if n <= 1:
         return False
     if n <= 3:
@@ -23,7 +29,7 @@ def read_file(path: str) -> list[int]:
     return list(map(lambda x: int(x), lines))
 
 
-def pollards_rho(n):
+def pollards_rho(n: int) -> int:
     if n % 2 == 0:
         return 2
     x = 2
@@ -54,7 +60,7 @@ def main() -> None:
     numbers = read_file(path_file)
     for number in numbers:
         first, second = factorize_number(number)
-        print(f"{number}={second}*{first}")
+        print("{:d}={:d}*{:d}".format(number, first, second))
 
 
 if __name__ == '__main__':
